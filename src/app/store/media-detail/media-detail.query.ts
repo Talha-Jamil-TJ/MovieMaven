@@ -12,6 +12,9 @@ export class MediaDetailQuery extends Query<MediaDetailState> {
     this.select(({ data }) => data).pipe(
       filter(Boolean),
       map((data) => Object.entries(data) as [string, string][]),
+      map((entries) =>
+        entries.filter(([key]) => !['Ratings', 'Response'].includes(key)),
+      ),
     ),
     {
       initialValue: [],

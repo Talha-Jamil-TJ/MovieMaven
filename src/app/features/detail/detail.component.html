@@ -13,7 +13,7 @@
     }
   </mat-button-toggle-group>
 
-  @if (form.controls?.t; as control) {
+  @if (form.controls.t; as control) {
     <mat-form-field class="title-field">
       <mat-label>Title</mat-label>
       <input
@@ -21,13 +21,13 @@
         [formControl]="control"
         placeholder="Movie title to search for"
       />
-      @if (control.hasError("required")) {
+      @if (control.hasError('required')) {
         <mat-error>Title is <strong>required</strong></mat-error>
       }
     </mat-form-field>
   }
 
-  @if (form.controls?.i; as control) {
+  @if (form.controls.i; as control) {
     <mat-form-field class="id-field">
       <mat-label>IMDB ID</mat-label>
       <input
@@ -35,7 +35,7 @@
         [formControl]="control"
         placeholder="A valid IMDb ID (e.g. tt1285016)"
       />
-      @if (control.hasError("required")) {
+      @if (control.hasError('required')) {
         <mat-error>Title is <strong>required</strong></mat-error>
       }
     </mat-form-field>
