@@ -9,7 +9,7 @@ import { MediaDetailStore } from './media-detail.store';
   providedIn: 'root',
 })
 export class MediaDetailService implements OnDestroy {
-  apiKey = '8ea39b15';
+  private _apiKey = '8ea39b15';
 
   constructor(
     private _store: MediaDetailStore,
@@ -21,14 +21,7 @@ export class MediaDetailService implements OnDestroy {
       this._store.setLoading(true);
       this._store.setError(null);
 
-      const data = await firstValueFrom(
-        this._http.get<IMediaDetail>('http://www.omdbapi.com', {
-          params: {
-            ...formValue,
-            apiKey: this.apiKey,
-          },
-        }),
-      );
+      const data = await firstValueFrom(this._getMediaDetail(formValue));
 
       this._store.update({ data });
     } catch (e) {
@@ -42,5 +35,14 @@ export class MediaDetailService implements OnDestroy {
 
   ngOnDestroy() {
     this._store.destroy();
+  }
+
+  private _getMediaDetail(formValue: Partial<IMediaDetailFormValue>) {
+    return this._http.get<IMediaDetail>('http://www.omdbapi.com', {
+      params: {
+        ...formValue,
+        apiKey: this._apiKey,
+      },
+    });
   }
 }

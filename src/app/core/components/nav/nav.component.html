@@ -1,9 +1,24 @@
 <mat-toolbar>
-  <span>Movie Maven</span>
+  <span id="title">Movie Maven</span>
 
   <div class="spacer"></div>
 
-  <a [routerLinkActiveOptions]="{ exact: true }" mat-button routerLink="/" routerLinkActive="active">List</a>
+  <a
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="link"
+    id="list-link"
+    mat-button
+    routerLink="/"
+    routerLinkActive="active"
+    >List</a
+  >
 
-  <a mat-button routerLink="/detail" routerLinkActive="active">Detail</a>
+  <a
+    class="link"
+    id="detail-link"
+    mat-button
+    routerLink="/detail"
+    routerLinkActive="active"
+    >Detail</a
+  >
 </mat-toolbar>

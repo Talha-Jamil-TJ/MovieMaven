@@ -2,7 +2,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { groupMoviesByYear } from '@shared/helpers/group-movies-by-year.helper';
 import { IMediaSearchFormValue } from '@shared/interfaces/media-list.form.interface';
-import { IMediaListResponse, Media } from '@shared/interfaces/media-list.response.interface';
+import {
+  IMediaListResponse,
+  Media,
+} from '@shared/interfaces/media-list.response.interface';
 import { firstValueFrom } from 'rxjs';
 import { MediaListQuery } from './media-list.query';
 import { MediaListStore } from './media-list.store';
@@ -11,13 +14,10 @@ import { MediaListStore } from './media-list.store';
   providedIn: 'root',
 })
 export class MediaListService implements OnDestroy {
-  apiKey = '8ea39b15';
-
   formValue = this._query.formValue;
-
   groupingWorker!: Worker;
-
   isWorkerSupported: boolean;
+  private _apiKey = '8ea39b15';
 
   constructor(
     private _store: MediaListStore,
@@ -52,7 +52,7 @@ export class MediaListService implements OnDestroy {
       const response = await firstValueFrom(
         this._http.get<IMediaListResponse>('http://www.omdbapi.com', {
           params: {
-            apiKey: this.apiKey,
+            apiKey: this._apiKey,
             ...this.formValue(),
           },
         }),
@@ -82,9 +82,13 @@ export class MediaListService implements OnDestroy {
 
   private _setupGroupingWorker(): void {
     if (this.isWorkerSupported) {
-      this.groupingWorker = new Worker(new URL('./web-workers/media-group.worker.ts', import.meta.url));
+      this.groupingWorker = new Worker(
+        new URL('./web-workers/media-group.worker.ts', import.meta.url),
+      );
 
-      this.groupingWorker.onmessage = ({ data }: MessageEvent<Record<string, Media[]>>) => {
+      this.groupingWorker.onmessage = ({
+        data,
+      }: MessageEvent<Record<string, Media[]>>) => {
         this._store.update({ data });
       };
 
