@@ -1,0 +1,42 @@
+<table [dataSource]="data()" mat-table>
+  <ng-container matColumnDef="Poster">
+    <th *matHeaderCellDef mat-header-cell>Poster</th>
+    <td *matCellDef="let element" mat-cell>
+      <span class="image-container">
+        <img [alt]="element.Title" [src]="element.Poster" height="112.5" loading="lazy" width="75" />
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Title">
+    <th *matHeaderCellDef mat-header-cell>Title</th>
+    <td *matCellDef="let element" mat-cell>{{ element.Title }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Year">
+    <th *matHeaderCellDef mat-header-cell>Year</th>
+    <td *matCellDef="let element" mat-cell>{{ element.Year }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Type">
+    <th *matHeaderCellDef mat-header-cell>Type</th>
+    <td *matCellDef="let element" mat-cell>{{ element.Type }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ID">
+    <th *matHeaderCellDef mat-header-cell>ID</th>
+    <td *matCellDef="let element" mat-cell>{{ element.imdbID }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Action">
+    <th *matHeaderCellDef mat-header-cell>Action</th>
+    <td *matCellDef="let element" mat-cell>
+      <button mat-icon-button routerLink="/detail/{{ element.imdbID }}">
+        <mat-icon>visibility</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="columns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: columns" mat-row></tr>
+</table>

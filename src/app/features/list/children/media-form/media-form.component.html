@@ -1,0 +1,35 @@
+<form (ngSubmit)="onSearch()" [formGroup]="form">
+  <mat-form-field class="title">
+    <mat-label>Title</mat-label>
+    <input formControlName="s" matInput placeholder="Ex. Die Hard" />
+
+    @if (form.controls.s.hasError('required')) {
+      <mat-error>Title is <strong>required</strong></mat-error>
+    }
+  </mat-form-field>
+
+  <div class="mobile-row">
+    <mat-form-field class="media-type">
+      <mat-label>Media Type</mat-label>
+      <mat-select formControlName="type">
+        @for (media of mediaTypes; track media) {
+          <mat-option [value]="media">{{ media }}</mat-option>
+        }
+      </mat-select>
+      @if (form.controls.type.value) {
+        <button (click)="clearTypeSelection()" aria-label="Clear" mat-icon-button matSuffix>
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="year">
+      <mat-label>Year</mat-label>
+      <input [formControl]="yearControl" [matDatepicker]="picker" matInput placeholder="YYYY" />
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker (yearSelected)="chosenYearHandler($event)" startView="multi-year"> </mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <button [disabled]="isLoading()" class="submit" mat-raised-button type="submit">search</button>
+</form>

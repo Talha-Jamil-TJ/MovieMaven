@@ -1,0 +1,9 @@
+section {
+  padding: 1.25rem;
+
+  mat-expansion-panel {
+    ::ng-deep .mat-expansion-panel-body {
+      overflow-x: auto;
+    }
+  }
+}
