@@ -1,0 +1,43 @@
+form {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.25rem;
+
+  .submit {
+    flex: 1;
+
+    height: 3.438rem;
+    line-height: 3rem;
+  }
+
+  .title {
+    flex: 4;
+  }
+
+  .mobile-row {
+    display: flex;
+    gap: 1.25rem;
+
+    > * {
+      flex: 1;
+    }
+  }
+
+  @media only screen and (max-width: 35.99rem) {
+    flex-direction: column;
+
+    .mobile-row {
+      gap: 0.625rem;
+    }
+
+    .media-type,
+    .year {
+      flex-basis: 50%;
+    }
+
+    .title,
+    .submit {
+      flex-basis: 100%;
+    }
+  }
+}

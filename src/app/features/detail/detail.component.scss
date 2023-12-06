@@ -1,0 +1,28 @@
+.details-form {
+  padding: 1.25rem;
+
+  display: flex;
+
+  gap: 1.25rem;
+
+  .search-toggle {
+    height: fit-content;
+
+    .search-type-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 3.125rem;
+    }
+  }
+
+  .search-type-container,
+  .submit {
+    height: 3.438rem;
+    line-height: 3rem;
+  }
+}
+
+.container {
+  padding: 1.25rem;
+}

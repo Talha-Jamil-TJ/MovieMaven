@@ -1,0 +1,45 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form" class="details-form">
+  <mat-button-toggle-group
+    (change)="onSearchTermToggle($event)"
+    [formControl]="searchTermSwitchControl"
+    aria-label="Search Toggle"
+    class="search-toggle"
+    name="searchTermSwitchControl"
+  >
+    @for (item of titleAndId; track item) {
+      <mat-button-toggle [value]="item">
+        <span class="search-type-container">{{ item }}</span>
+      </mat-button-toggle>
+    }
+  </mat-button-toggle-group>
+
+  @if (form.controls?.t; as control) {
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput [formControl]="control" placeholder="Movie title to search for" />
+      @if (control.hasError('required')) {
+        <mat-error>Title is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+  }
+
+  @if (form.controls?.i; as control) {
+    <mat-form-field>
+      <mat-label>IMDB ID</mat-label>
+      <input matInput [formControl]="control" placeholder="A valid IMDb ID (e.g. tt1285016)" />
+      @if (control.hasError('required')) {
+        <mat-error>Title is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+  }
+
+  <button [disabled]="isLoading()" class="submit" mat-raised-button type="submit">search</button>
+</form>
+
+@if (detail()) {
+  <section class="container">
+    <mat-card>
+      <mat-card-content> {{ detail() | json }}</mat-card-content>
+    </mat-card>
+  </section>
+}
