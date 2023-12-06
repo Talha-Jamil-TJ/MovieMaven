@@ -4,13 +4,9 @@ import { IMediaDetail } from '@shared/interfaces/media-detail.response.interface
 
 export interface MediaDetailState {
   data: IMediaDetail | null;
-  isFormSubmitted: boolean;
-  error: string | null;
 }
 
 export const createInitialState = (): MediaDetailState => ({
-  isFormSubmitted: false,
-  error: null,
   data: null,
 });
 

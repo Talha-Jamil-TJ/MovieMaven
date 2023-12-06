@@ -14,32 +14,56 @@
   </mat-button-toggle-group>
 
   @if (form.controls?.t; as control) {
-    <mat-form-field>
+    <mat-form-field class="title-field">
       <mat-label>Title</mat-label>
-      <input matInput [formControl]="control" placeholder="Movie title to search for" />
-      @if (control.hasError('required')) {
+      <input
+        matInput
+        [formControl]="control"
+        placeholder="Movie title to search for"
+      />
+      @if (control.hasError("required")) {
         <mat-error>Title is <strong>required</strong></mat-error>
       }
     </mat-form-field>
   }
 
   @if (form.controls?.i; as control) {
-    <mat-form-field>
+    <mat-form-field class="id-field">
       <mat-label>IMDB ID</mat-label>
-      <input matInput [formControl]="control" placeholder="A valid IMDb ID (e.g. tt1285016)" />
-      @if (control.hasError('required')) {
+      <input
+        matInput
+        [formControl]="control"
+        placeholder="A valid IMDb ID (e.g. tt1285016)"
+      />
+      @if (control.hasError("required")) {
         <mat-error>Title is <strong>required</strong></mat-error>
       }
     </mat-form-field>
   }
 
-  <button [disabled]="isLoading()" class="submit" mat-raised-button type="submit">search</button>
+  <button
+    [disabled]="isLoading()"
+    class="submit"
+    mat-raised-button
+    type="submit"
+  >
+    search
+  </button>
 </form>
 
-@if (detail()) {
-  <section class="container">
+@if (detailEntries().length) {
+  <section class="detail-section">
     <mat-card>
-      <mat-card-content> {{ detail() | json }}</mat-card-content>
+      <mat-card-content>
+        <div class="container">
+          @for (data of detailEntries(); track data[0]) {
+            <mat-form-field class="field" appearance="outline">
+              <mat-label>{{ data[0] }}</mat-label>
+              <input matInput [value]="data[1]" readonly />
+            </mat-form-field>
+          }
+        </div>
+      </mat-card-content>
     </mat-card>
   </section>
 }

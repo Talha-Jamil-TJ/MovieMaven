@@ -7,6 +7,11 @@
 
   .search-toggle {
     height: fit-content;
+    flex: 1;
+
+    .mat-button-toggle {
+      width: 50%;
+    }
 
     .search-type-container {
       display: flex;
@@ -21,8 +26,40 @@
     height: 3.438rem;
     line-height: 3rem;
   }
+
+  .title-field,
+  .id-field {
+    flex: 5;
+  }
+
+  .submit {
+    flex: 1;
+  }
+
+  @media only screen and (max-width: 35.99rem) {
+    flex-direction: column;
+    flex: 0;
+  }
 }
 
-.container {
+.detail-section {
   padding: 1.25rem;
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .field {
+      flex: 1 1 32%;
+
+      @media only screen and (max-width: 64rem) {
+        flex-basis: 48%;
+
+        @media only screen and (max-width: 35.99rem) {
+          flex-basis: 100%;
+        }
+      }
+    }
+  }
 }

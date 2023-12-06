@@ -1,8 +1,16 @@
 import { JsonPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleChange, MatButtonToggleModule } from '@angular/material/button-toggle';
+import {
+  MatButtonToggleChange,
+  MatButtonToggleModule,
+} from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +20,10 @@ import { MediaDetailSearch } from '@shared/enums/media-detail-search.enum';
 import { MediaPlot } from '@shared/enums/media-plot.enum';
 import { MediaType } from '@shared/enums/media-type.enum';
 import { removeFalsyValues } from '@shared/helpers/remove-falsy-values.helper';
-import { IMediaDetailForm, IMediaDetailFormValue } from '@shared/interfaces/media-detail.form.interface';
+import {
+  IMediaDetailForm,
+  IMediaDetailFormValue,
+} from '@shared/interfaces/media-detail.form.interface';
 import { MediaDetailQuery } from '@store/media-detail/media-detail.query';
 import { MediaDetailService } from '@store/media-detail/media-detail.service';
 
@@ -40,7 +51,7 @@ export class DetailComponent implements OnInit {
 
   isLoading = this._query.isLoading;
 
-  detail = this._query.detail;
+  detailEntries = this._query.detailEntries;
 
   constructor(
     private _query: MediaDetailQuery,
@@ -79,25 +90,32 @@ export class DetailComponent implements OnInit {
       y: new FormControl<number | null>(null),
     });
 
-    this.searchTermSwitchControl = new FormControl<MediaDetailSearch>(MediaDetailSearch.Title);
+    this.searchTermSwitchControl = new FormControl<MediaDetailSearch>(
+      MediaDetailSearch.Title,
+    );
   }
 
   private _initTitleControl(): void {
     if (this.form.controls.i) {
       this.form.removeControl('i');
     }
-    this.form.addControl('t', new FormControl<string | null>(null, Validators.required));
+    this.form.addControl(
+      't',
+      new FormControl<string | null>(null, Validators.required),
+    );
   }
 
   private _initIdControl(value = null): void {
     if (this.form.controls.t) {
       this.form.removeControl('t');
     }
-    this.form.addControl('i', new FormControl<string | null>(value, Validators.required));
+    this.form.addControl(
+      'i',
+      new FormControl<string | null>(value, Validators.required),
+    );
   }
 
   private async _subscribeToRouterSnapshot(): Promise<void> {
-    console.log('this._route.snapshot: ', this._route.snapshot);
     const id = this._route.snapshot.params?.['id'];
 
     if (!id) {

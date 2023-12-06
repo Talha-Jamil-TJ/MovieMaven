@@ -3,7 +3,6 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { IMediaDetailFormValue } from '@shared/interfaces/media-detail.form.interface';
 import { IMediaDetail } from '@shared/interfaces/media-detail.response.interface';
 import { firstValueFrom } from 'rxjs';
-import { MediaDetailQuery } from './media-detail.query';
 import { MediaDetailStore } from './media-detail.store';
 
 @Injectable({
@@ -14,13 +13,8 @@ export class MediaDetailService implements OnDestroy {
 
   constructor(
     private _store: MediaDetailStore,
-    private _query: MediaDetailQuery,
     private _http: HttpClient,
   ) {}
-
-  setIsFormSubmitted(isFormSubmitted: boolean): void {
-    this._store.update({ isFormSubmitted });
-  }
 
   async getDetail(formValue: Partial<IMediaDetailFormValue>): Promise<void> {
     try {
