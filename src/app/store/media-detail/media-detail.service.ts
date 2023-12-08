@@ -38,7 +38,7 @@ export class MediaDetailService implements OnDestroy {
   }
 
   private _getMediaDetail(formValue: Partial<IMediaDetailFormValue>) {
-    return this._http.get<IMediaDetail>('http://www.omdbapi.com', {
+    return this._http.get<IMediaDetail>('https://www.omdbapi.com', {
       params: {
         ...formValue,
         apiKey: this._apiKey,

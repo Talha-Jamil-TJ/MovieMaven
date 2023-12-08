@@ -54,7 +54,7 @@ describe('MediaDetailService', () => {
     service['_getMediaDetail']({}).subscribe();
 
     const req = httpTestingController.expectOne(
-      'http://www.omdbapi.com?apiKey=8ea39b15',
+      'https://www.omdbapi.com?apiKey=8ea39b15',
     );
 
     expect(req.request.method).toEqual('GET');

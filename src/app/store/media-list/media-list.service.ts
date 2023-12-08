@@ -50,7 +50,7 @@ export class MediaListService implements OnDestroy {
       this._store.setError(null);
 
       const response = await firstValueFrom(
-        this._http.get<IMediaListResponse>('http://www.omdbapi.com', {
+        this._http.get<IMediaListResponse>('https://www.omdbapi.com', {
           params: {
             apiKey: this._apiKey,
             ...this.formValue(),
